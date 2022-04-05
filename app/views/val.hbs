@@ -18,27 +18,11 @@
             Project validation and verification report
         </div>
         <div class="card-body">
-            <form method="POST" action="/add" enctype="multipart/form-data">
+            <form method="POST" action="/val" enctype="multipart/form-data">
                 <h5 class="card-title">validation and verification Documents</h5>
                 <div class="form-group">
-                    <label for="file1">Project Discription:</label>
+                    <label for="file1">Validation Report:</label>
                     <input type="file" class="form-control-file" id="file1" name="file1">
-                </div>
-                <div class="form-group">
-                    <label for="file2">Carbon Credit Certificate:</label>
-                    <input type="file" class="form-control-file" id="file2" name="file2" multiple>
-                </div>
-                <div class="form-group">
-                    <label for="file3">Evidence of project ownership:</label>
-                    <input type="file" class="form-control-file" id="file3" name="file3" multiple>
-                </div>
-                <div class="form-group">
-                    <label for="file4">KYC Document (passport / ID) :</label>
-                    <input type="file" class="form-control-file" id="file4" name="file4" multiple>
-                </div>
-                <div class="form-group">
-                    <label for="file5">Any other document:</label>
-                    <input type="file" class="form-control-file" id="file5" name="file5" multiple>
                 </div>
                 <button type="submit" class="btn btn-primary">Upload Document</button>
             </form>

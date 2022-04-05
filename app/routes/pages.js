@@ -9,5 +9,5 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/add',upload, authController.add);
-
+router.post('/val',upload, authController.val);
 module.exports = router;

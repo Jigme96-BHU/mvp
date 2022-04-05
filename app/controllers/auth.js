@@ -1,5 +1,13 @@
+const bodyParser = require('body-parser')
 const Web3 = require('web3')
 const { uploadDoc, web3} = require ('../lib/uploadDoc')
+const express = require('express')
+
+const app = express()
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
+
 
 const details = async (hash, blockNumber, event = undefined) => {
   const timestamp = (await web3.eth.getBlock(blockNumber)).timestamp
@@ -12,30 +20,75 @@ const details = async (hash, blockNumber, event = undefined) => {
 
 exports.add = async (req, res) => {
 
-  if (req.uploadError || req.file.buffer.length === 0)
-    return res.status(400).json({
-      success: false,
-      message: req.uploadError || 'invalid file data' })
+  // if (req.uploadError || req.file.buffer.length === 0)
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: req.uploadError || 'invalid file data' })
 
-  const hash = Web3.utils.keccak256(req.file.buffer)
-  console.log(hash)
-  // const blockNumbers = await uploadDoc.methods.validate(hash)
-  // console.log(blockNumbers)
-  const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
+  const file = req.files
+  console.log(file.file1[0].buffer.length)
+  console.log(file.file2[0].buffer.length)
+  console.log(file.file3[0].buffer.length)
+  console.log(file.file4[0].buffer.length)
+  console.log(file.file5[0].buffer.length)
+
+  res.send("success")
+
+  // const hash = Web3.utils.keccak256(req.file.buffer)
+  
+  // console.log(hash)
+
+  // // const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
   // blockNumber = 0
-  if (blockNumber > 0)
-    return res.status(400).json({
-      success: false,
-      message: 'given image is already part of the blockchain.',
-      details: await details(hash, blockNumber)
-    })
+  // if (blockNumber > 0)
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'given image is already part of the blockchain.',
+  //     details: await details(hash, blockNumber)
+  //   })
 
-  try {
-    const address = req.body.address || '0xc5a725e5ccb15a2efaca11ffe281851748480670'
-    const result = await uploadDoc.methods.add(hash).send({ from: address })
-    res.status(201).json({ success: true, details: await details(hash, result.blockNumber, result.event) })
-  } catch (err) {
-    return res.status(400).json({ success: false, message: err.message || err })
-  }
+  // try {
+  //   const address = req.body.address || '0xc5a725e5ccb15a2efaca11ffe281851748480670'
+  //   const result = await uploadDoc.methods.add(hash).send({ from: address })
+  //   res.status(201).json({ success: true, details: await details(hash, result.blockNumber, result.event) })
+  // } catch (err) {
+  //   return res.status(400).json({ success: false, message: err.message || err })
+  // }
 
  }
+ 
+
+ exports.val = async (req, res) => {
+
+  // if (req.uploadError || req.file.buffer.length === 0)
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: req.uploadError || 'invalid file data' })
+
+  const file = req.files
+  console.log(file.file1[0].buffer.length)
+  res.send("success")
+
+  // const hash = Web3.utils.keccak256(req.file.buffer)
+  
+  // console.log(hash)
+
+  // // const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
+  // blockNumber = 0
+  // if (blockNumber > 0)
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: 'given image is already part of the blockchain.',
+  //     details: await details(hash, blockNumber)
+  //   })
+
+  // try {
+  //   const address = req.body.address || '0xc5a725e5ccb15a2efaca11ffe281851748480670'
+  //   const result = await uploadDoc.methods.add(hash).send({ from: address })
+  //   res.status(201).json({ success: true, details: await details(hash, result.blockNumber, result.event) })
+  // } catch (err) {
+  //   return res.status(400).json({ success: false, message: err.message || err })
+  // }
+
+ }
+ 

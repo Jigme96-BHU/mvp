@@ -11,7 +11,7 @@ contract uploadDoc {
     // mapping(address => uint256) public power;
     mapping(bytes32 => uint256) private hashes;
 
-    event powerAdded(address station, bytes32 hash);
+    event docAdded(address station, bytes32 hash);
 
     modifier hashOnlyOnce(bytes32 hash) {
         require(0 == hashes[hash]);
@@ -20,7 +20,7 @@ contract uploadDoc {
 
     function add(bytes32 hash) public hashOnlyOnce(hash) {
         hashes[hash] = block.number;
-        emit powerAdded(msg.sender, hash);
+        emit docAdded(msg.sender, hash);
     }
 
     /**

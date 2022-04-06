@@ -30,12 +30,8 @@ exports.add = async (req, res) => {
   if (file.file1 === undefined || file.file2 === undefined || file.file3 === undefined || file.file4 === undefined || file.file5 === undefined )
     return res.status(400).json({
         success: false,
-        message: 'Please upload all the files'
+        message: 'Please upload all the file'
     })
-
-  const hash = Web3.utils.keccak256(file.file1[0].buffer)
-  
-  console.log(hash)
 
   // // const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
   // blockNumber = 0
@@ -46,17 +42,23 @@ exports.add = async (req, res) => {
   //     details: await details(hash, blockNumber)
   //   })
 
-  // try {
-  //   const address = req.body.address || '0xc5a725e5ccb15a2efaca11ffe281851748480670'
-  //   const result = await uploadDoc.methods.add(hash).send({ from: address })
-  //   res.status(201).json({ success: true, details: await details(hash, result.blockNumber, result.event) })
-  // } catch (err) {
-  //   return res.status(400).json({ success: false, message: err.message || err })
-  // }
-
+  
+  let detail = [];
+  for(var i = 1; i <= 5; i++){
+    const address = req.body.address || '0xc5a725e5ccb15a2efaca11ffe281851748480670'
+    let filename = "file"+i;
+    let buffer= file[filename][0].buffer
+    const hash = Web3.utils.keccak256(buffer)
+    const result = await uploadDoc.methods.add(hash).send({ from: address })
+    detail[i-1] = await details(hash, result.blockNumber, res.event) 
+  }
+  try {
+    res.status(201).json({ success: true, details: detail })
+  } catch (err) {
+    return res.status(400).json({ success: false, message: err.message || err })
+  }
  }
  
-
  exports.val = async (req, res) => {
 
   // if (req.uploadError || req.file.buffer.length === 0)

@@ -20,23 +20,22 @@ const details = async (hash, blockNumber, event = undefined) => {
 
 exports.add = async (req, res) => {
 
-  // if (req.uploadError || req.file.buffer.length === 0)
-  //   return res.status(400).json({
-  //     success: false,
-  //     message: req.uploadError || 'invalid file data' })
+  if (req.uploadError)
+    return res.status(400).json({
+      success: false,
+      message: req.uploadError || 'invalid file data' })
 
   const file = req.files
-  console.log(file.file1[0].buffer.length)
-  console.log(file.file2[0].buffer.length)
-  console.log(file.file3[0].buffer.length)
-  console.log(file.file4[0].buffer.length)
-  console.log(file.file5[0].buffer.length)
-
-  res.send("success")
-
-  // const hash = Web3.utils.keccak256(req.file.buffer)
   
-  // console.log(hash)
+  if (file.file1 === undefined || file.file2 === undefined || file.file3 === undefined || file.file4 === undefined || file.file5 === undefined )
+    return res.status(400).json({
+        success: false,
+        message: 'Please upload all the files'
+    })
+
+  const hash = Web3.utils.keccak256(file.file1[0].buffer)
+  
+  console.log(hash)
 
   // // const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
   // blockNumber = 0

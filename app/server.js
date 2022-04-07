@@ -9,7 +9,6 @@ const eth_port = process.env.ETH_PORT || 7545
 const network_id = process.env.NETWORK_ID || 5777
 let blockchain
 
-
 const ganacheServer = ganache.server({
     deterministic: true,
     mnemonic: 'buzz carbon minute major tackle price green dutch latin window extend happiness',
@@ -25,20 +24,10 @@ ganacheServer.listen(eth_port, (err, chain) => {
 
 const app = express()
 const server = require('http').createServer(app)
-
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
-// app.use(express.urlencoded({extended:true}));
-//Parse JSON bodies (as sent by API clients)
-// app.use(express.json());
-// app.set('json spaces', 4)
-
-
-
-app.set('view engine', 'hbs');
-
-  
+app.set('view engine', 'hbs');  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); 
 

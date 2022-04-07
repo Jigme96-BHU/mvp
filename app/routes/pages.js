@@ -1,6 +1,7 @@
 const express = require("express");
 const authController = require('../controllers/auth');
 const upload = require("../lib/upload");
+const uploadsingle = require("../lib/uploadsingle");
 
 const router = express.Router();
 
@@ -23,5 +24,6 @@ router.get('/var',(req,res)=>{
     res.render("verification");
 })
 router.post('/add',upload, authController.add);
-router.post('/val',upload, authController.val);
+router.post('/val',uploadsingle, authController.val);
+router.post('/mon',upload, authController.mon);
 module.exports = router;

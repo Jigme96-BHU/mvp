@@ -8,7 +8,6 @@ pragma solidity >=0.5.0 <0.9.0;
  */
 contract uploadDoc {
 
-    // mapping(address => uint256) public power;
     mapping(bytes32 => uint256) private hashes;
 
     event docAdded(address station, bytes32 hash);

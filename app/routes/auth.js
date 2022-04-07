@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post('/add', authController.register);
 
-
 module.exports = router;
 
 

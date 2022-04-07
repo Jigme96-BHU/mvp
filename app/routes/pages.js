@@ -26,4 +26,5 @@ router.get('/var',(req,res)=>{
 router.post('/add',upload, authController.add);
 router.post('/val',uploadsingle, authController.val);
 router.post('/mon',upload, authController.mon);
+
 module.exports = router;

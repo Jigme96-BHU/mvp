@@ -40,7 +40,7 @@ exports.add = async (req, res) => {
       if (blockNumber > 0)
         return res.status(400).json({
           success: false,
-          message: 'given image is already part of the blockchain.',
+          message: 'Given document is already part of the blockchain.',
           details: await details(hash, blockNumber)
         })
     const result = await uploadDoc.methods.add(hash).send({ from: address })
@@ -69,7 +69,7 @@ exports.add = async (req, res) => {
   if (blockNumber > 0)
     return res.status(400).json({
       success: false,
-      message: 'given image is already part of the blockchain.',
+      message: 'Given document is already part of the blockchain.',
       details: await details(hash, blockNumber)
     })
 
@@ -112,7 +112,7 @@ exports.mon = async (req, res) => {
       if (blockNumber > 0)
         return res.status(400).json({
           success: false,
-          message: 'given image is already part of the blockchain.',
+          message: 'Given document is already part of the blockchain.',
           details: await details(hash, blockNumber)
         })
     const result = await uploadDoc.methods.add(hash).send({ from: address })

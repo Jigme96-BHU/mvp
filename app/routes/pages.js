@@ -23,8 +23,14 @@ router.get('/mon',(req,res)=>{
 router.get('/var',(req,res)=>{
     res.render("verification");
 })
+
+router.get('/ver',(req,res)=>{
+    res.render("Docvalidation");
+})
+
+
 router.post('/add',upload, authController.add);
 router.post('/val',uploadsingle, authController.val);
 router.post('/mon',upload, authController.mon);
-
+router.post('/verify',uploadsingle,authController.verify)
 module.exports = router;

@@ -124,3 +124,18 @@ exports.mon = async (req, res) => {
     return res.status(400).json({ success: false, message: err.message || err })
   }
  }
+
+  
+exports.verify = async (req, res) => {
+  if (req.uploadError) return res.status(400).json({ success: false, message: req.uploadError })
+  //fs.writeFileSync('test.jpg', req.file.buffer)
+  const hash = Web3.utils.keccak256(req.file.buffer) //generation of Hash
+  const blockNumber = Number(await uploadDoc.methods.validate(hash).call())
+  if (blockNumber <= 0)
+    return res.status(200).json({
+      success: true,
+      verified: false,
+      message: 'given image is not part of the blockchain.'
+    })
+  res.status(200).json({ success: true, verified: true, details: await details(hash, blockNumber) })
+ }
